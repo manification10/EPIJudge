@@ -9,20 +9,26 @@ RED, WHITE, BLUE = range(3)
 
 
 def dutch_flag_partition(pivot_index: int, A: List[int]) -> None:
-    smaller = 0 # everything to the left of the smaller is smaller
-    larger = len(A)-1 # everything to the right of the larger is larger
-    pivot = A[pivot_index]
-    for i in range(len(A)):
-        if A[i] < pivot:
-            A[i],A[smaller] = A[smaller],A[i]
-            smaller +=1
+    # maintain bottom, middle, unclassified, top
+    # bottom --> A[:smaller]
+    # middle --> A[smaller:equal]
+    # unclassified --> A[equal:larger]
+    # top --> A[larger:]
+    smaller = 0
+    equal = 0
+    larger = len(A)
 
-    for i in reversed(range(len(A))):
-        if A[i] < pivot:
-            break
-        if A[i] > pivot:
-            A[i],A[larger] = A[larger],A[i]
-            larger-=1
+    pivot = A[pivot_index]
+    while equal < larger:
+        if A[equal] < pivot: # put that value in the bottom bucket and advance smaller and equal
+            A[equal],A[smaller] = A[smaller],A[equal] # because it is swapped from earlier, it is already classified
+            smaller+=1
+            equal+=1
+        elif A[equal] == pivot:
+            equal+=1
+        else:
+            larger -= 1
+            A[larger], A[equal] = A[equal],A[larger]
 
     return A
 
