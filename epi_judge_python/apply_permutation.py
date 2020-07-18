@@ -4,8 +4,12 @@ from test_framework import generic_test
 
 
 def apply_permutation(perm: List[int], A: List[int]) -> None:
-    # TODO - you fill in here.
-    return
+    positons = {}
+    for i,p in enumerate(perm):
+        positons[p] = A[i]
+    for i in range(len(A)):
+        A[i] = positons[i]
+    return A
 
 
 def apply_permutation_wrapper(perm, A):
