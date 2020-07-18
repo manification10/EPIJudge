@@ -390,7 +390,7 @@ problem_mapping = {
                 "total": 9
             },
             "Python: random_subset.py": {
-                "passed": 1,
+                "passed": 9,
                 "total": 9
             }
         },
