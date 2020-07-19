@@ -2,14 +2,43 @@ from test_framework import generic_test
 from test_framework.test_failure import TestFailure
 
 
+
 def int_to_string(x: int) -> str:
-    # TODO - you fill in here.
-    return '0'
+    if x == 0:
+        return '0'
+    is_negative = False
+    if x < 0:
+        x = -x
+        is_negative = True
+    s= []
+    while x:
+        s.append(chr(ord('0')+x%10))
+        x //= 10
+    return ('-' if is_negative else '') + ''.join(reversed(s))
 
 
 def string_to_int(s: str) -> int:
-    # TODO - you fill in here.
-    return 0
+    formedInt = 0
+    is_negative = False
+    i = 0
+    if s[0] == '-':
+        is_negative = True
+        i = 1
+    elif s[0] == '+':
+        i = 1
+
+    while i < len(s):
+        formedInt = formedInt*10 + ord(s[i]) - ord('0')
+        i+=1
+
+    if is_negative:
+        formedInt = -formedInt
+    return formedInt
+
+
+
+
+
 
 
 def wrapper(x, s):
